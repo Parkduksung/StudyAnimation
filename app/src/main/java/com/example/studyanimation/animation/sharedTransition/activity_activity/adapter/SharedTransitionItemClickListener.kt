@@ -1,4 +1,4 @@
-package com.example.studyanimation.animation.sharedTransition.adapter
+package com.example.studyanimation.animation.sharedTransition.activity_activity.adapter
 
 import android.view.View
 

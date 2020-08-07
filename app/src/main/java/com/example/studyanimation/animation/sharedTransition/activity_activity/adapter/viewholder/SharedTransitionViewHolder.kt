@@ -1,4 +1,4 @@
-package com.example.studyanimation.animation.sharedTransition.adapter.viewholder
+package com.example.studyanimation.animation.sharedTransition.activity_activity.adapter.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.studyanimation.R
-import com.example.studyanimation.animation.sharedTransition.adapter.SharedTransitionItemClickListener
+import com.example.studyanimation.animation.sharedTransition.activity_activity.adapter.SharedTransitionItemClickListener
 
 class SharedTransitionViewHolder(parent: ViewGroup, @LayoutRes private val layoutId: Int) :
     RecyclerView.ViewHolder(
