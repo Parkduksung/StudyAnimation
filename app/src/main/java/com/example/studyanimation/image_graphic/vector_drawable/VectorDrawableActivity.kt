@@ -9,7 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.studyanimation.BaseActivity
 import com.example.studyanimation.R
 
-class VectorDrawableActivity : BaseActivity(R.layout.activity_drawable) {
+class VectorDrawableActivity : BaseActivity(R.layout.activity_vector_drawable) {
 
     //VectorDrawable은 XML 파일에서 연관된 색상 정보와 함께 점, 선, 곡선의 조합으로 정의되는 벡터 그래픽입니다
     //가장 큰 장점은 이미지 확장성입니다. 화면 품질이 손상되지 않고 크기를 조정할 수 있으므로
