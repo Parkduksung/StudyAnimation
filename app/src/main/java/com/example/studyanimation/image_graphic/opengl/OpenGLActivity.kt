@@ -8,7 +8,7 @@ import com.example.studyanimation.R
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class OpenGLActivity : BaseActivity(R.layout.activity_opengl){
+class OpenGLActivity : BaseActivity(R.layout.activity_opengl) {
 
     //Android에서는 Open Graphic Library(OpenGL®), 특히 OpenGL ES API가 포함된 고성능 2D 및 3D 그래픽을 지원합니다.
     // OpenGL은 3D 그래픽 처리 하드웨어의 표준 소프트웨어 인터페이스를 지정하는 크로스 플랫폼 그래픽 API입니다.
@@ -45,7 +45,7 @@ class OpenGLActivity : BaseActivity(R.layout.activity_opengl){
     // OpenGL에서는 정사각형의 균일 좌표계를 가정하며, 대체로 정사각형이 아닌 화면에서 완전히 정사각형인 것처럼 좌표를 그립니다.
 
 
-    private lateinit var gLView : GLSurfaceView
+    private lateinit var gLView: GLSurfaceView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

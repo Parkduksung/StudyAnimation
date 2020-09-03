@@ -19,7 +19,6 @@ class MyGLSurfaceView(context: Context) : GLSurfaceView(context) {
         setRenderer(renderer)
 
 
-
         //그리기 데이터가 변경될 때만 뷰를 그리도록 렌더링 모드를 설정하는 것입니다.
         renderMode = RENDERMODE_WHEN_DIRTY
         //이처럼 설정하면 requestRender()를 호출할 때까지 GLSurfaceView 프레임을 다시 그리지 않습니다. 그러면 이 샘플 앱에 더 효율적입니다.
