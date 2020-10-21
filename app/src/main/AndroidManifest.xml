@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:name=".App"
         android:theme="@style/AppTheme">
-        <activity android:name=".opengl.camera2.AndroidCameraApi">
+        <activity android:name=".opengl.lecture.MainGLActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
