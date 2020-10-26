@@ -4,6 +4,8 @@ import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLUtils
 import android.opengl.Matrix
+import com.example.studyanimation.opengl.lecture.OpenGLUtil.createProgram
+import com.example.studyanimation.opengl.lecture.OpenGLUtil.loadShader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -15,6 +17,9 @@ class Tex(bitmap: Bitmap) {
     protected var mUvBuffer: FloatBuffer
     private val mMtrxView = FloatArray(16)
     private val mHandleBitmap: Int
+
+
+    //vertex 를 위한 사각형 출력하기 위해 이렇게 선언.
     var mSquareCoords = floatArrayOf(
         -0.5f, 0.5f, 0.0f,  // top left
         -0.5f, -0.5f, 0.0f,  // bottom left
@@ -28,41 +33,104 @@ class Tex(bitmap: Bitmap) {
     // order to draw vertices
     private val mProgram: Int
     private var mPositionHandle = 0
+    private var mTextureHandel = 0
+    private var mMatrixHandle = 0
+
     fun draw() {
-        GLES20.glUseProgram(mProgram)
-        Matrix.setIdentityM(mMtrxView, 0)
-        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition")
-        GLES20.glEnableVertexAttribArray(mPositionHandle)
-        GLES20.glVertexAttribPointer(mPositionHandle, 3, GLES20.GL_FLOAT, false, 0, mVertexBuffer)
-        val texCoordLoc = GLES20.glGetAttribLocation(mProgram, "a_texCoord")
-        GLES20.glEnableVertexAttribArray(texCoordLoc)
-        GLES20.glVertexAttribPointer(texCoordLoc, 2, GLES20.GL_FLOAT, false, 0, mUvBuffer)
-        val mtrxhandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix")
-        GLES20.glUniformMatrix4fv(mtrxhandle, 1, false, mMtrxView, 0)
+
+
         GLES20.glEnable(GLES20.GL_BLEND)
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+
+
+        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition")
+        mTextureHandel = GLES20.glGetAttribLocation(mProgram, "a_texCoord")
+        mMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix")
+
+
+        GLES20.glUseProgram(mProgram)
+        Matrix.setIdentityM(mMtrxView, 0)
+        GLES20.glEnableVertexAttribArray(mPositionHandle)
+        GLES20.glVertexAttribPointer(mPositionHandle, 3, GLES20.GL_FLOAT, false, 0, mVertexBuffer)
+
+        GLES20.glEnableVertexAttribArray(mTextureHandel)
+        GLES20.glVertexAttribPointer(mTextureHandel, 2, GLES20.GL_FLOAT, false, 0, mUvBuffer)
+        GLES20.glUniformMatrix4fv(mMatrixHandle, 1, false, mMtrxView, 0)
+
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mHandleBitmap)
         GLES20.glDrawElements(
             GLES20.GL_TRIANGLES, mDrawOrder.size,
             GLES20.GL_UNSIGNED_SHORT, mDrawListBuffer
         )
         GLES20.glDisableVertexAttribArray(mPositionHandle)
-        GLES20.glDisableVertexAttribArray(texCoordLoc)
+        GLES20.glDisableVertexAttribArray(mTextureHandel)
     }
 
     private fun getImageHandle(bitmap: Bitmap): Int {
-        val texturenames = IntArray(1)
-        GLES20.glGenTextures(1, texturenames, 0)
+
+        //이미지를 파라메터로 받음.
+
+        val textureNames = IntArray(1)
+
+        //제러네이트 텍스쳐 생성
+        GLES20.glGenTextures(1, textureNames, 0)
+        //엑티브 텍스쳐 생성  , 뒤에 0인 이유가 이미지가 1개이기 때문에 만약 2개면 0,1 이런식으로 붙이면 된다.
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texturenames[0])
+
+        // 텍스쳐를 생성한걸 바인드 시킨다.
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureNames[0])
+
+        // 텍스쳐 파라메터인데 작으면 크게하고 크면 작게하는 그런 형태의 명령문.
         GLES20.glTexParameteri(
             GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
             GLES20.GL_LINEAR
         )
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+
+
+        //이미지를 비트맵의 이미지를 받아서 최종적으로 int 형태인 이미지 핸들을 반환함.
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
-        return texturenames[0]
+        return textureNames[0]
     }
+
+
+    init {
+        val bb = ByteBuffer.allocateDirect(
+            mSquareCoords.size * 4
+        )
+        bb.order(ByteOrder.nativeOrder())
+        mVertexBuffer = bb.asFloatBuffer()
+        mVertexBuffer.put(mSquareCoords)
+        mVertexBuffer.position(0)
+        val dlb = ByteBuffer.allocateDirect(
+            mDrawOrder.size * 2
+        )
+        dlb.order(ByteOrder.nativeOrder())
+        mDrawListBuffer = dlb.asShortBuffer()
+        mDrawListBuffer.put(mDrawOrder)
+        mDrawListBuffer.position(0)
+
+        //좌표계를 설정.
+        mUvs = floatArrayOf(
+            0.0f, 0.0f,
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f
+        )
+
+        //실수형이기 때문에 버퍼를 4만큼 잡아놓음.
+        val bbUvs = ByteBuffer.allocateDirect(mUvs.size * 4)
+        bbUvs.order(ByteOrder.nativeOrder())
+        mUvBuffer = bbUvs.asFloatBuffer()
+        mUvBuffer.put(mUvs)
+        mUvBuffer.position(0)
+
+        //프로그램을 이용하여 쉐이더 프로그를 컴파일하고 링크한다음.
+        mProgram = createProgram(vs_Image, fs_Image)
+
+        mHandleBitmap = getImageHandle(bitmap)
+    }
+
 
     companion object {
         protected lateinit var mUvs: FloatArray
@@ -81,49 +149,6 @@ class Tex(bitmap: Bitmap) {
                 "void main() {" +
                 "  gl_FragColor = texture2D( s_texture, v_texCoord );" +
                 "}"
-    }
-
-    init {
-        val bb = ByteBuffer.allocateDirect(
-            mSquareCoords.size * 4
-        )
-        bb.order(ByteOrder.nativeOrder())
-        mVertexBuffer = bb.asFloatBuffer()
-        mVertexBuffer.put(mSquareCoords)
-        mVertexBuffer.position(0)
-        val dlb = ByteBuffer.allocateDirect(
-            mDrawOrder.size * 2
-        )
-        dlb.order(ByteOrder.nativeOrder())
-        mDrawListBuffer = dlb.asShortBuffer()
-        mDrawListBuffer.put(mDrawOrder)
-        mDrawListBuffer.position(0)
-        mUvs = floatArrayOf(
-            0.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-            1.0f, 0.0f
-        )
-        val bbUvs = ByteBuffer.allocateDirect(mUvs.size * 4)
-        bbUvs.order(ByteOrder.nativeOrder())
-        mUvBuffer = bbUvs.asFloatBuffer()
-        mUvBuffer.put(mUvs)
-        mUvBuffer.position(0)
-        val vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vs_Image)
-        val fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fs_Image)
-        mProgram = GLES20.glCreateProgram()
-        GLES20.glAttachShader(mProgram, vertexShader)
-        GLES20.glAttachShader(mProgram, fragmentShader)
-        GLES20.glLinkProgram(mProgram)
-        mHandleBitmap = getImageHandle(bitmap)
-    }
-
-
-    private fun loadShader(type: Int, shaderCode: String?): Int {
-        val shader = GLES20.glCreateShader(type)
-        GLES20.glShaderSource(shader, shaderCode)
-        GLES20.glCompileShader(shader)
-        return shader
     }
 
 }

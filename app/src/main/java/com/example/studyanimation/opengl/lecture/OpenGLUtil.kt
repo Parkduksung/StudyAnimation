@@ -5,6 +5,7 @@ import android.opengl.GLES20
 object OpenGLUtil {
 
 
+    //
     fun loadShader(type: Int, shaderCode: String?): Int {
         val shader = GLES20.glCreateShader(type)
         GLES20.glShaderSource(shader, shaderCode)
