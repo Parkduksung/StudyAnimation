@@ -36,6 +36,7 @@ class MainGLActivity : Activity(), GLSurfaceView.Renderer {
     }
 
     override fun onDrawFrame(gl: GL10?) {
+//        init()
         GLES20.glClear(GL10.GL_COLOR_BUFFER_BIT)
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f)
         mTex.draw()

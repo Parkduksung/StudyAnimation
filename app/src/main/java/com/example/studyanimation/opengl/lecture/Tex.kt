@@ -2,22 +2,23 @@ package com.example.studyanimation.opengl.lecture
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
-import android.opengl.GLUtils
 import android.opengl.Matrix
 import com.example.studyanimation.opengl.lecture.OpenGLUtil.createProgram
-import com.example.studyanimation.opengl.lecture.OpenGLUtil.loadShader
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
 class Tex(bitmap: Bitmap) {
+
     private val mVertexBuffer: FloatBuffer
     private val mDrawListBuffer: ShortBuffer
     protected var mUvBuffer: FloatBuffer
     private val mMtrxView = FloatArray(16)
     private val mHandleBitmap: Int
+    private var buffer : ByteBuffer ?= null
 
+    private
 
     //vertex 를 위한 사각형 출력하기 위해 이렇게 선언.
     var mSquareCoords = floatArrayOf(
@@ -38,7 +39,6 @@ class Tex(bitmap: Bitmap) {
 
     fun draw() {
 
-
         GLES20.glEnable(GLES20.GL_BLEND)
         GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
 
@@ -48,16 +48,33 @@ class Tex(bitmap: Bitmap) {
         mMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix")
 
 
+        //생성한 프로그램 사용.
         GLES20.glUseProgram(mProgram)
-        Matrix.setIdentityM(mMtrxView, 0)
+
         GLES20.glEnableVertexAttribArray(mPositionHandle)
         GLES20.glVertexAttribPointer(mPositionHandle, 3, GLES20.GL_FLOAT, false, 0, mVertexBuffer)
 
         GLES20.glEnableVertexAttribArray(mTextureHandel)
         GLES20.glVertexAttribPointer(mTextureHandel, 2, GLES20.GL_FLOAT, false, 0, mUvBuffer)
-        GLES20.glUniformMatrix4fv(mMatrixHandle, 1, false, mMtrxView, 0)
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mHandleBitmap)
+//        GLES20.glTexSubImage2D(
+//            GLES20.GL_TEXTURE_2D,
+//            0,
+//            0,
+//            0,
+//            500,
+//            500,
+//            GLES20.GL_RGBA,
+//            GLES20.GL_UNSIGNED_BYTE,
+//            buffer
+//        )
+
+        Matrix.setIdentityM(mMtrxView, 0)
+        GLES20.glUniformMatrix4fv(mMatrixHandle, 1, false, mMtrxView, 0)
+//        GLES20.glDrawElements(GLES20.GL_TRIANGLES, 6, GLES20.GL_UNSIGNED_SHORT, mUvBuffer)
+
+
         GLES20.glDrawElements(
             GLES20.GL_TRIANGLES, mDrawOrder.size,
             GLES20.GL_UNSIGNED_SHORT, mDrawListBuffer
@@ -75,21 +92,55 @@ class Tex(bitmap: Bitmap) {
         //제러네이트 텍스쳐 생성
         GLES20.glGenTextures(1, textureNames, 0)
         //엑티브 텍스쳐 생성  , 뒤에 0인 이유가 이미지가 1개이기 때문에 만약 2개면 0,1 이런식으로 붙이면 된다.
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+//        GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
 
         // 텍스쳐를 생성한걸 바인드 시킨다.
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureNames[0])
 
         // 텍스쳐 파라메터인데 작으면 크게하고 크면 작게하는 그런 형태의 명령문.
-        GLES20.glTexParameteri(
-            GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
-            GLES20.GL_LINEAR
+        GLES20.glTexParameterf(
+            GLES20.GL_TEXTURE_2D,
+            GLES20.GL_TEXTURE_MIN_FILTER,
+            GLES20.GL_NEAREST.toFloat()
         )
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+        GLES20.glTexParameterf(
+            GLES20.GL_TEXTURE_2D,
+            GLES20.GL_TEXTURE_MAG_FILTER,
+            GLES20.GL_LINEAR.toFloat()
+        )
+        GLES20.glTexParameteri(
+            GLES20.GL_TEXTURE_2D,
+            GLES20.GL_TEXTURE_WRAP_S,
+            GLES20.GL_CLAMP_TO_EDGE
+        )
+        GLES20.glTexParameteri(
+            GLES20.GL_TEXTURE_2D,
+            GLES20.GL_TEXTURE_WRAP_T,
+            GLES20.GL_CLAMP_TO_EDGE
+        )
 
 
+
+        // Load the data from the buffer into the texture handle.
+//        GLES20.glTexImage2D(
+//            GLES20.GL_TEXTURE_2D,  /*level*/0, format,
+//            width, height,  /*border*/0, format, GLES20.GL_UNSIGNED_BYTE, data
+//        )
+
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D)
+        GLES20.glTexImage2D(
+            GLES20.GL_TEXTURE_2D,
+            0,
+            GLES20.GL_RGBA,
+            500,
+            500,
+            0,
+            GLES20.GL_RGBA,
+            GLES20.GL_UNSIGNED_BYTE,
+            null
+        )
         //이미지를 비트맵의 이미지를 받아서 최종적으로 int 형태인 이미지 핸들을 반환함.
-        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
+//        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
         return textureNames[0]
     }
 
@@ -103,7 +154,7 @@ class Tex(bitmap: Bitmap) {
         mVertexBuffer.put(mSquareCoords)
         mVertexBuffer.position(0)
         val dlb = ByteBuffer.allocateDirect(
-            mDrawOrder.size * 2
+            mDrawOrder.size * 4
         )
         dlb.order(ByteOrder.nativeOrder())
         mDrawListBuffer = dlb.asShortBuffer()
@@ -128,6 +179,8 @@ class Tex(bitmap: Bitmap) {
         //프로그램을 이용하여 쉐이더 프로그를 컴파일하고 링크한다음.
         mProgram = createProgram(vs_Image, fs_Image)
 
+        buffer = ByteBuffer.allocate(bitmap.byteCount)
+        bitmap.copyPixelsToBuffer(buffer)
         mHandleBitmap = getImageHandle(bitmap)
     }
 

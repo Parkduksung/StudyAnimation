@@ -52,7 +52,7 @@ class Triangle {
             // create a floating point buffer from the ByteBuffer
             asFloatBuffer().apply {
                 // add the coordinates to the FloatBuffer
-                put(triangleCoords)
+                put(squareCoords)
                 // set the buffer to read the first coordinate
                 position(0)
             }
@@ -75,7 +75,6 @@ class Triangle {
             GLES20.glLinkProgram(it)
         }
 
-
     }
 
     fun loadShader(type: Int, shaderCode: String): Int {
@@ -83,7 +82,6 @@ class Triangle {
         // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
         // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
         return GLES20.glCreateShader(type).also { shader ->
-
             // add the source code to the shader and compile it
             GLES20.glShaderSource(shader, shaderCode)
             GLES20.glCompileShader(shader)
