@@ -127,7 +127,7 @@ class Tex(bitmap: Bitmap) {
 //            width, height,  /*border*/0, format, GLES20.GL_UNSIGNED_BYTE, data
 //        )
 
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D)
+//        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D)
         GLES20.glTexImage2D(
             GLES20.GL_TEXTURE_2D,
             0,
