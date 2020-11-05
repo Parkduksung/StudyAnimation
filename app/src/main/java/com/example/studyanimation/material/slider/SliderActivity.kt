@@ -1,4 +1,4 @@
-package com.example.studyanimation.material
+package com.example.studyanimation.material.slider
 
 import android.os.Bundle
 import android.util.Log

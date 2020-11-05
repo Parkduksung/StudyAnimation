@@ -2,6 +2,7 @@ package com.example.studyanimation.opengl.lecture
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
+import android.opengl.GLUtils
 import android.opengl.Matrix
 import com.example.studyanimation.opengl.lecture.OpenGLUtil.createProgram
 import java.nio.ByteBuffer
@@ -16,7 +17,7 @@ class Tex(bitmap: Bitmap) {
     protected var mUvBuffer: FloatBuffer
     private val mMtrxView = FloatArray(16)
     private val mHandleBitmap: Int
-    private var buffer : ByteBuffer ?= null
+    private var buffer: ByteBuffer? = null
 
     private
 
@@ -57,7 +58,7 @@ class Tex(bitmap: Bitmap) {
         GLES20.glEnableVertexAttribArray(mTextureHandel)
         GLES20.glVertexAttribPointer(mTextureHandel, 2, GLES20.GL_FLOAT, false, 0, mUvBuffer)
 
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mHandleBitmap)
+//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mHandleBitmap)
 //        GLES20.glTexSubImage2D(
 //            GLES20.GL_TEXTURE_2D,
 //            0,
@@ -120,7 +121,6 @@ class Tex(bitmap: Bitmap) {
         )
 
 
-
         // Load the data from the buffer into the texture handle.
 //        GLES20.glTexImage2D(
 //            GLES20.GL_TEXTURE_2D,  /*level*/0, format,
@@ -128,19 +128,19 @@ class Tex(bitmap: Bitmap) {
 //        )
 
 //        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D)
-        GLES20.glTexImage2D(
-            GLES20.GL_TEXTURE_2D,
-            0,
-            GLES20.GL_RGBA,
-            500,
-            500,
-            0,
-            GLES20.GL_RGBA,
-            GLES20.GL_UNSIGNED_BYTE,
-            null
-        )
+//        GLES20.glTexImage2D(
+//            GLES20.GL_TEXTURE_2D,
+//            0,
+//            GLES20.GL_RGBA,
+//            500,
+//            500,
+//            0,
+//            GLES20.GL_RGBA,
+//            GLES20.GL_UNSIGNED_BYTE,
+//            null
+//        )
         //이미지를 비트맵의 이미지를 받아서 최종적으로 int 형태인 이미지 핸들을 반환함.
-//        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
         return textureNames[0]
     }
 
@@ -202,6 +202,10 @@ class Tex(bitmap: Bitmap) {
                 "void main() {" +
                 "  gl_FragColor = texture2D( s_texture, v_texCoord );" +
                 "}"
+
+
     }
+
+
 
 }
