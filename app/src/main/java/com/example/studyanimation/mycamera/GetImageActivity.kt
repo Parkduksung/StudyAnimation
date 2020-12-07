@@ -2,8 +2,10 @@ package com.example.studyanimation.mycamera
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.studyanimation.BaseActivity
 import com.example.studyanimation.R
@@ -22,15 +24,37 @@ class GetImageActivity : BaseActivity(R.layout.activity_getimage) {
         binding.lifecycleOwner = this
         setContentView(binding.root)
 
+        binding.getImage.bringToFront()
+
         binding.getImage.setOnClickListener {
             tedPermission()
-//            Toast.makeText(this, "나옴", Toast.LENGTH_LONG).show()
         }
-
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode==PICK_FROM_ALBUM && resultCode == RESULT_OK){
+
+            val url = data?.data
+
+            if(url != null){
+                try {
+                    val inputStream = contentResolver.openInputStream(url)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    inputStream?.close()
+                    binding.image.setImageBitmap(bitmap)
+                }catch (e : Exception) {
+                    throw Exception()
+                }
+            }
+
+        }else{
+            Toast.makeText(this, "onActivityResult_x", Toast.LENGTH_SHORT).show()
+        }
 
 
+    }
 
     private fun goToAlbum() {
         val intent = Intent(Intent.ACTION_PICK)
