@@ -42,8 +42,6 @@ class OrientationViewModel(private val context: Application) : AndroidViewModel(
                     onViewStateChanged(ViewState.RotationLock)
                 }
             }
-
-
         }
 
     }
