@@ -2,6 +2,7 @@ package com.example.expandablelistview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expandablelistview.R
@@ -20,10 +21,11 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
                 name.text = item.name
                 memo.text = item.memo
             }
-        }
 
-        itemView.setOnClickListener {
-            listener.onItemClick(item)
+            itemView.setOnClickListener {
+                binding.containerExpand.isVisible = !binding.containerExpand.isVisible
+                listener.onItemClick(item)
+            }
         }
     }
 }
