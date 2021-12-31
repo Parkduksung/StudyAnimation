@@ -24,6 +24,13 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 
             itemView.setOnClickListener {
                 binding.containerExpand.isVisible = !binding.containerExpand.isVisible
+
+                if (binding.containerExpand.isVisible) {
+                    binding.containerExpand.animate().setDuration(200L).rotation(360f)
+                } else {
+                    binding.containerExpand.animate().setDuration(200L).rotation(0f)
+                }
+
                 listener.onItemClick(item)
             }
         }
