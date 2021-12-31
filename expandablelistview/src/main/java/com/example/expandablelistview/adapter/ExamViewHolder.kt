@@ -13,7 +13,7 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 ) {
     private val binding = DataBindingUtil.bind<ItemExamBinding>(itemView)
 
-    fun bind(item: Exam, listener: ExamItemClickListener) {
+    fun bind(item: Exam, listener: (item: Exam) -> Unit) {
 
         binding?.let {
             with(it) {
@@ -31,7 +31,7 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         }
 
         itemView.setOnClickListener {
-            listener.onItemClick(item)
+            listener(item)
         }
     }
 }

@@ -1,14 +1,13 @@
 package com.example.expandablelistview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.expandablelistview.adapter.Exam
 import com.example.expandablelistview.adapter.ExamAdapter
-import com.example.expandablelistview.adapter.ExamItemClickListener
 import com.example.expandablelistview.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), ExamItemClickListener {
+class MainActivity : AppCompatActivity() {
 
     private val examAdapter = ExamAdapter()
 
@@ -27,11 +26,9 @@ class MainActivity : AppCompatActivity(), ExamItemClickListener {
             adapter = examAdapter
         }
         examAdapter.addAll(mockExamList)
-        examAdapter.setOnClickListener(this)
-    }
-
-    override fun onItemClick(item: Exam) {
-        examAdapter.toggleExpand(item)
+        examAdapter.setOnClickListener {
+            examAdapter.toggleExpand(it)
+        }
     }
 
     companion object {

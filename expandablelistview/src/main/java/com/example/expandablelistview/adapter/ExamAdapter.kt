@@ -7,7 +7,7 @@ class ExamAdapter : RecyclerView.Adapter<ExamViewHolder>() {
 
     private val itemList = mutableListOf<Exam>()
 
-    private lateinit var examItemClickListener: ExamItemClickListener
+    private lateinit var examItemClickListener: (item: Exam) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExamViewHolder =
         ExamViewHolder(parent)
@@ -24,7 +24,7 @@ class ExamAdapter : RecyclerView.Adapter<ExamViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setOnClickListener(listener: ExamItemClickListener) {
+    fun setOnClickListener(listener: (item: Exam) -> Unit) {
         examItemClickListener = listener
     }
 
