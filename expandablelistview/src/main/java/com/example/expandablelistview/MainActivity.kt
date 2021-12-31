@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), ExamItemClickListener {
     }
 
     override fun onItemClick(item: Exam) {
-
+        examAdapter.toggleExpand(item)
     }
 
     companion object {

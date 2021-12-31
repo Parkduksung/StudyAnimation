@@ -27,4 +27,13 @@ class ExamAdapter : RecyclerView.Adapter<ExamViewHolder>() {
     fun setOnClickListener(listener: ExamItemClickListener) {
         examItemClickListener = listener
     }
+
+    fun toggleExpand(item: Exam) {
+        if (itemList.contains(item)) {
+            val index = itemList.indexOf(item)
+            itemList[index] = item.copy(isExpand = !item.isExpand)
+            notifyItemChanged(index)
+        }
+    }
+
 }

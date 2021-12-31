@@ -20,19 +20,18 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
                 no.text = item.no.toString()
                 name.text = item.name
                 memo.text = item.memo
-            }
-
-            itemView.setOnClickListener {
-                binding.containerExpand.isVisible = !binding.containerExpand.isVisible
-
+                expand.text = item.isExpand.toString()
+                binding.containerExpand.isVisible = item.isExpand
                 if (binding.containerExpand.isVisible) {
                     binding.containerExpand.animate().setDuration(200L).rotation(360f)
                 } else {
                     binding.containerExpand.animate().setDuration(200L).rotation(0f)
                 }
-
-                listener.onItemClick(item)
             }
+        }
+
+        itemView.setOnClickListener {
+            listener.onItemClick(item)
         }
     }
 }
@@ -40,7 +39,8 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 data class Exam(
     val no: Int,
     val name: String,
-    val memo: String
+    val memo: String,
+    val isExpand: Boolean = false,
 )
 
 
