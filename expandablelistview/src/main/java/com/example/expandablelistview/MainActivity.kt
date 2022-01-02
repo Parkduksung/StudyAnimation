@@ -3,6 +3,7 @@ package com.example.expandablelistview
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.expandablelistview.adapter.DetailItem
 import com.example.expandablelistview.adapter.Exam
 import com.example.expandablelistview.adapter.ExamAdapter
 import com.example.expandablelistview.databinding.ActivityMainBinding
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             for (i in 0..50) {
                 add(Exam(i, "Name is $i", "Memo is $i"))
             }
+            this[0] = this[0].copy(detailList = listOf(DetailItem("1", "1"), DetailItem("2", "2")))
         }
     }
 }
