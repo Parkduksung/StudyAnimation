@@ -27,6 +27,7 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
                 adapter = detailAdapter
             }
             binding.rvNest.setHasFixedSize(true)
+            binding.rvNest.isNestedScrollingEnabled = true
 
             detailAdapter.addAll(item.detailList)
 
