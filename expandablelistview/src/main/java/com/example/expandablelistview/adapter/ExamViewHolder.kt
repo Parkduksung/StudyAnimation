@@ -21,8 +21,10 @@ class ExamViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             expand.text = item.isExpand.toString()
             binding.containerExpand.isVisible = item.isExpand
             if (binding.containerExpand.isVisible) {
+                binding.arrow.setImageResource(R.drawable.ic_arrow_up)
                 binding.containerExpand.animate().setDuration(200L).rotation(360f)
             } else {
+                binding.arrow.setImageResource(R.drawable.ic_arrow_down)
                 binding.containerExpand.animate().setDuration(200L).rotation(0f)
             }
         }
