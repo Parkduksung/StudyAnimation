@@ -3,3 +3,4 @@ rootProject.name = "StudyAnimation"
 include ':expandablelistview'
 include ':coordinatorlyaout'
 include ':calendar'
+include ':piechart'

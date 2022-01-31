@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/calendar" />
             <option value="$PROJECT_DIR$/coordinatorlyaout" />
             <option value="$PROJECT_DIR$/expandablelistview" />
+            <option value="$PROJECT_DIR$/piechart" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
