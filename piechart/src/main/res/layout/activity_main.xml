@@ -12,17 +12,14 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
-        <com.github.mikephil.charting.charts.PieChart
+        <com.example.piechart.PieChartView
             android:id="@+id/pie_chart"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
