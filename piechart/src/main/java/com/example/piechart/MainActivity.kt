@@ -1,10 +1,10 @@
 package com.example.piechart
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.ColorUtils
 import androidx.databinding.DataBindingUtil
 import com.example.piechart.databinding.ActivityMainBinding
 import com.github.mikephil.charting.data.Entry
@@ -25,29 +25,18 @@ class MainActivity : AppCompatActivity() {
 
 
         val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(1f))
-        entries.add(PieEntry(1f))
 
+        var colorList =
+            resources.getIntArray(R.array.array_background_according_code).toMutableList()
 
-        val colorList = arrayListOf(
-            Color.RED,
-            Color.BLUE,
-            Color.CYAN,
-            Color.GRAY,
-            Color.GREEN,
-            Color.BLACK,
-            Color.YELLOW
-        )
+        colorList.forEach {
+            entries.add(PieEntry(10f))
+        }
 
         val pieDataSet = PieDataSet(entries, "").apply {
             valueTextSize = 0f
             colors = colorList
-            sliceSpace = 3f
+            sliceSpace = 10f
         }
 
         with(binding.pieChart) {
@@ -60,15 +49,26 @@ class MainActivity : AppCompatActivity() {
                 override fun onValueSelected(e: Entry?, h: Highlight?) {
                     //x 값이 index 값.
                     highlightValues(null)
-                    colorList[(h!!.x).toInt()] = Color.LTGRAY
-                    Toast.makeText(this@MainActivity, h?.x.toString(), Toast.LENGTH_LONG).show()
+//                  val t  =  ColorUtils.setAlphaComponent(colorList[(h!!.x).toInt()],80)
+                    colorList[(h!!.x).toInt()] =
+                        ColorUtils.setAlphaComponent(colorList[(h.x).toInt()], 80)
+                    Toast.makeText(this@MainActivity, h.x.toString(), Toast.LENGTH_LONG).show()
                     invalidate()
                 }
 
                 override fun onNothingSelected() {
+//                    pieDataSet.colors = resources.getIntArray(R.array.array_background_according_code).toMutableList()
+//                    invalidate()
+//                    colorList.map { resources.getIntArray(R.array.array_background_according_code) }
                     Log.d("결과", "onNothingSelected")
                 }
             })
+        }
+
+        binding.btnInit.setOnClickListener {
+            colorList = resources.getIntArray(R.array.array_background_according_code).toMutableList()
+            pieDataSet.colors = colorList
+            binding.pieChart.invalidate()
         }
 
     }

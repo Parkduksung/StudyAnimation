@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="array_background_according_code">
+        <item>#FED200</item>
+        <item>#BDCC00</item>
+        <item>#4E9F00</item>
+        <item>#008650</item>
+        <item>#00836E</item>
+        <item>#0075BD</item>
+        <item>#1D3D8A</item>
+        <item>#5C2C78</item>
+        <item>#CD1066</item>
+        <item>#DB0220</item>
+        <item>#F33B00</item>
+        <item>#F58D00</item>
+    </array>
+</resources>
