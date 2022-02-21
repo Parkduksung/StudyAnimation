@@ -1,7 +1,12 @@
 package com.example.tooltip
 
+import android.graphics.Color
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.*
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.skydoves.balloon.*
@@ -31,5 +36,14 @@ class MainActivity : AppCompatActivity() {
             showAlignBottom(balloon)
         }
 
+        val ssb = SpannableStringBuilder("재입고 알림 신청 시 입고와 동시에\n" +
+                "알림을 받아보실 수 있습니다.\n" +
+                " X 다시 보지 않기")
+        ssb.apply {
+            setSpan(ForegroundColorSpan(Color.WHITE), 0, ssb.length-11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(ForegroundColorSpan(Color.LTGRAY), ssb.length-10, ssb.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(RelativeSizeSpan(.8f), ssb.length-10, ssb.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        findViewById<TextView>(R.id.tv_sample).text = ssb
     }
 }
