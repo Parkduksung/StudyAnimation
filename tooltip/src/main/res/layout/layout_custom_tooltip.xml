@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   android:layout_width="160dp"
+                                                   android:layout_height="80dp"
+                                                   android:padding="3dp"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp" android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent=".7"
+        app:layout_constraintWidth_percent=".9"
+        app:layout_constraintVertical_bias=".0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="30dp"
+        android:autoSizeMinTextSize="5dp"
+        android:lines="2"
+        android:text="재입고 알림 신청 시 입고와 동시에\n알림을 받아보실 수 있습니다."/>
+
+    <TextView
+        android:id="@+id/tv_not_view"
+        android:layout_width="0dp" android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent=".9"
+        app:layout_constraintTop_toTopOf="@id/tv_content"
+        app:layout_constraintHeight_percent=".2"
+        app:layout_constraintVertical_bias=".7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#a0a0a0"
+        android:gravity="center_vertical"
+        android:textSize="10dp"
+        android:lines="1"
+        android:text="X 다시보지 않기"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
