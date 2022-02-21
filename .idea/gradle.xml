@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/coordinatorlyaout" />
             <option value="$PROJECT_DIR$/expandablelistview" />
             <option value="$PROJECT_DIR$/piechart" />
+            <option value="$PROJECT_DIR$/tooltip" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
