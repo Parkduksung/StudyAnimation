@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">tooltip</string>
+
+    <string name="label_ready_alarm_tooltip_1">재입고 알림 신청 시 입고와 동시에\n알림을 받아보실 수 있습니다.</string>
+    <string name="label_ready_alarm_tooltip_bottom">다시 보지 않기</string>
 </resources>
