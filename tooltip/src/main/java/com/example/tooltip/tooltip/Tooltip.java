@@ -85,7 +85,7 @@ public final class Tooltip {
 
         mPopupWindow = new PopupWindow(builder.mContext);
         mPopupWindow.setClippingEnabled(false);
-        mPopupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setWidth(1200);
         mPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setContentView(getContentView(builder));
         mPopupWindow.setBackgroundDrawable(new ColorDrawable());
@@ -140,7 +140,32 @@ public final class Tooltip {
 
         mContentView = new LinearLayout(builder.mContext);
         mContentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        mContentView.setOrientation(Gravity.isHorizontal(mGravity) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
+        mContentView.setOrientation(LinearLayout.VERTICAL);
+
+
+        LinearLayout linearLayout = new LinearLayout(builder.mContext);
+        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.setBackground(drawable);
+
+        TextView textView1 = new TextView(builder.mContext);
+        textView1.setText("다시 보지 않기");
+        textView1.setLineSpacing(builder.mLineSpacingExtra, builder.mLineSpacingMultiplier);
+        textView1.setTextColor(builder.mContext.getResources().getColor(R.color.light_gray_alarm_on,null));
+        textView1.setIncludeFontPadding(false);
+
+        LinearLayout.LayoutParams textViewParams1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+        textViewParams1.gravity = Gravity.CENTER;
+        textView1.setLayoutParams(textViewParams1);
+
+        ImageView closeImage = new ImageView(builder.mContext);
+        closeImage.setImageDrawable(ResourcesCompat.getDrawable(builder.mContext.getResources(), R.drawable.tooltip_close2, null));
+        closeImage.setPadding(30, 2, 3, 0);
+
+
+
+        linearLayout.addView(closeImage);
+        linearLayout.addView(textView1);
 
         if (builder.isArrowEnabled) {
             mArrowView = new ImageView(builder.mContext);
@@ -162,6 +187,7 @@ public final class Tooltip {
             } else {
                 mContentView.addView(mArrowView);
                 mContentView.addView(textView);
+//                mContentView.addView(linearLayout);
             }
         } else {
             mContentView.addView(textView);
@@ -277,7 +303,7 @@ public final class Tooltip {
                 location.y = anchorRect.top - mContentView.getHeight() - mMargin;
                 break;
             case Gravity.BOTTOM:
-                location.x = anchorCenter.x - mContentView.getWidth() / 2f;
+                location.x = anchorCenter.x - mContentView.getWidth() / 3f;
                 location.y = anchorRect.bottom + mMargin;
                 break;
         }

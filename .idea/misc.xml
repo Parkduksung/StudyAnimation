@@ -10,10 +10,11 @@
         <entry key="expandablelistview/src/main/res/layout/activity_main.xml" value="0.1503623188405797" />
         <entry key="expandablelistview/src/main/res/layout/item_detail.xml" value="0.1947463768115942" />
         <entry key="expandablelistview/src/main/res/layout/item_exam.xml" value="0.1503623188405797" />
+        <entry key="piechart/src/main/res/layout/activity_linear.xml" value="0.21965579710144928" />
         <entry key="piechart/src/main/res/layout/activity_main.xml" value="0.11770833333333333" />
         <entry key="tooltip/src/main/res/drawable/pc26_round_box.xml" value="0.5432291666666667" />
-        <entry key="tooltip/src/main/res/layout/activity_main.xml" value="0.11822916666666666" />
-        <entry key="tooltip/src/main/res/layout/layout_custom_tooltip.xml" value="0.25" />
+        <entry key="tooltip/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="tooltip/src/main/res/layout/layout_custom_tooltip.xml" value="0.67" />
         <entry key="tooltip/src/main/res/layout/layout_tooltip.xml" value="0.5260416666666666" />
       </map>
     </option>
