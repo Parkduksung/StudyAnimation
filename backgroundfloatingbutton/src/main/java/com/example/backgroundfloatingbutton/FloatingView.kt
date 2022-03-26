@@ -11,8 +11,7 @@ class FloatingView @JvmOverloads constructor(
     mContext: Context,
     attributeSet: AttributeSet? = null,
     def: Int = 0
-) :
-    FrameLayout(mContext, attributeSet, def), View.OnTouchListener {
+) : FrameLayout(mContext, attributeSet, def), View.OnTouchListener {
 
     private var downRawX: Int = 0
     private var downRawY: Int = 0
