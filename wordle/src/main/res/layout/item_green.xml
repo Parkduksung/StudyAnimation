@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/green"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FF99F691"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#FF000000" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
