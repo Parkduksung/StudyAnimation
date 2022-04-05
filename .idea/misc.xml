@@ -19,7 +19,9 @@
         <entry key="tooltip/src/main/res/layout/layout_custom_tooltip.xml" value="0.67" />
         <entry key="tooltip/src/main/res/layout/layout_tooltip.xml" value="0.5260416666666666" />
         <entry key="wordle/src/main/res/layout/activity_main.xml" value="0.1802536231884058" />
+        <entry key="wordle/src/main/res/layout/item_color.xml" value="0.28894927536231885" />
         <entry key="wordle/src/main/res/layout/item_gray.xml" value="0.1802536231884058" />
+        <entry key="wordle/src/main/res/layout/item_yellow.xml" value="0.28894927536231885" />
       </map>
     </option>
   </component>

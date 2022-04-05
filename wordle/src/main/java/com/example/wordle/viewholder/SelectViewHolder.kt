@@ -8,10 +8,8 @@ import com.example.wordle.convertBackgroundAndTextColor
 import com.example.wordle.R
 import com.example.wordle.databinding.ItemSelectBinding
 
-class SelectViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.item_select, parent, false)
-) {
-    private val binding = ItemSelectBinding.bind(itemView)
+class SelectViewHolder(private val binding: ItemSelectBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
         item: List<Pair<Color, String>>,
@@ -51,5 +49,18 @@ class SelectViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
                 }
             }
         }
+    }
+
+    companion object {
+        fun create(
+            parent: ViewGroup
+        ): SelectViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_select, parent, false)
+            val binding = ItemSelectBinding.bind(view)
+            return SelectViewHolder(binding)
+        }
+
+
     }
 }
