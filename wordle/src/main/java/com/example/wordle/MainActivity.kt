@@ -4,22 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.wordle.adapter.GrayAdapter
-import com.example.wordle.adapter.GreenAdapter
-import com.example.wordle.adapter.SelectAdapter
-import com.example.wordle.adapter.YellowAdapter
+import com.example.wordle.adapter.*
 import com.example.wordle.databinding.ActivityMainBinding
 import java.io.IOException
 import kotlin.random.Random
 
-class MainActivity  : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     private val selectAdapter by lazy { SelectAdapter() }
-    private val greenAdapter by lazy { GreenAdapter() }
-    private val grayAdapter by lazy { GrayAdapter() }
-    private val yellowAdapter by lazy { YellowAdapter() }
+    private val greenAdapter by lazy { ColorAdapter() }
+    private val grayAdapter by lazy { ColorAdapter() }
+    private val yellowAdapter by lazy { ColorAdapter() }
 
     private var result: String? = null
 
@@ -48,13 +45,13 @@ class MainActivity  : AppCompatActivity() {
                                 getConvertList.forEach {
                                     when (it.first) {
                                         is Color.Yellow -> {
-                                            yellowAdapter.add(it.second) {}
+                                            yellowAdapter.add(it) {}
                                         }
                                         is Color.Gray -> {
-                                            grayAdapter.add(it.second) {}
+                                            grayAdapter.add(it) {}
                                         }
                                         is Color.Green -> {
-                                            greenAdapter.add(it.second) {}
+                                            greenAdapter.add(it) {}
                                         }
                                     }
                                 }

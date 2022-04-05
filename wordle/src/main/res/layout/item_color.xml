@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <variable
+            name="color"
+            type="com.example.wordle.Color" />
+
+        <variable
+            name="string"
+            type="java.lang.String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,14 +19,12 @@
         android:layout_margin="10dp">
 
         <TextView
-            android:id="@+id/green"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FF99F691"
             android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="#FF000000" />
-
+            android:text="@{string}"
+            android:textSize="20sp"
+            app:convertBackgroundAndTextColor="@{color}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
