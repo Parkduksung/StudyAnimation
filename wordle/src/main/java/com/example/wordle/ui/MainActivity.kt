@@ -1,19 +1,29 @@
 package com.example.wordle.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.wordle.ConvertUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.wordle.R
 import com.example.wordle.constant.Color
 import com.example.wordle.databinding.ActivityMainBinding
 import com.example.wordle.ui.adapter.ColorAdapter
 import com.example.wordle.ui.adapter.SelectAdapter
-import java.io.IOException
-import kotlin.random.Random
+import com.example.wordle.util.InjectUtil
 
 class MainActivity : AppCompatActivity() {
+
+    private val mainViewModel by lazy {
+        ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                    return MainViewModel(InjectUtil.provideAssetRepository(this@MainActivity)) as T
+                } else throw  IllegalArgumentException()
+            }
+        }).get(MainViewModel::class.java)
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -22,83 +32,53 @@ class MainActivity : AppCompatActivity() {
     private val grayAdapter by lazy { ColorAdapter() }
     private val yellowAdapter by lazy { ColorAdapter() }
 
-    private var result: String? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initUi()
+        initViewModel()
+    }
+
+    private fun initUi() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setContentView(binding.root)
-        result = getRandomStringFromAsset()
-
         with(binding) {
             rvInput.adapter = selectAdapter
             rvGreen.adapter = greenAdapter
             rvYellow.adapter = yellowAdapter
             rvGray.adapter = grayAdapter
+        }
+    }
 
-            btnSummit.setOnClickListener {
-                if (etInput.text.toString().length == 5) {
-                    if (getListFromAsset()!!.contains(etInput.text.toString())) {
-                        val getConvertList = ConvertUtil.convertList(
-                            result!!,
-                            etInput.text.toString()
-                        )
-                        selectAdapter.add(getConvertList) { isAdd ->
-                            if (isAdd) {
-                                getConvertList.forEach {
-                                    when (it.first) {
-                                        is Color.Yellow -> {
-                                            yellowAdapter.add(it) {}
-                                        }
-                                        is Color.Gray -> {
-                                            grayAdapter.add(it) {}
-                                        }
-                                        is Color.Green -> {
-                                            greenAdapter.add(it) {}
-                                        }
+    private fun initViewModel() {
+        binding.viewModel = mainViewModel
+
+        mainViewModel.mainViewStateLiveData.observe(this) { viewState ->
+            when (viewState) {
+                is MainViewState.Yield -> {
+                    selectAdapter.add(viewState.list) { isAdd ->
+                        if (isAdd) {
+                            viewState.list.forEach {
+                                when (it.first) {
+                                    is Color.Yellow -> {
+                                        yellowAdapter.add(it) {}
+                                    }
+                                    is Color.Gray -> {
+                                        grayAdapter.add(it) {}
+                                    }
+                                    is Color.Green -> {
+                                        greenAdapter.add(it) {}
                                     }
                                 }
                             }
                         }
-                    } else {
-                        Toast.makeText(this@MainActivity, "Not In Dictionary", Toast.LENGTH_SHORT)
-                            .show()
                     }
-
-                } else {
-                    Toast.makeText(this@MainActivity, "Not 5 Letter", Toast.LENGTH_SHORT)
-                        .show()
+                }
+                is MainViewState.Error -> {
+                    Toast.makeText(this@MainActivity, viewState.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-
-    private fun getRandomStringFromAsset(): String? {
-        return try {
-            val inputStream = assets.open("wordlist.txt")
-            val size: Int = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer).toString()
-            val list = String(buffer).split(",").map { it.trim().substring(1, 6) }
-            val randomNum = Random.nextInt(list.size)
-            list[randomNum]
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
-    private fun getListFromAsset(): List<String>? {
-        return try {
-            val inputStream = assets.open("wordlist.txt")
-            val size: Int = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer).toString()
-            String(buffer).split(",").map { it.trim().substring(1, 6) }
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
 }

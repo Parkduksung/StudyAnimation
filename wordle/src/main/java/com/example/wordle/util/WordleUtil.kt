@@ -10,7 +10,7 @@ object WordleUtil {
 
     fun getWordList(context: Context): List<String> {
         return try {
-            val inputStream = context.assets.open("wordlist.txt")
+            val inputStream = context.assets.open(ASSET_FILE_NAME)
             val size: Int = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer).toString()

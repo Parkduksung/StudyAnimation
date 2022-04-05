@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.wordle.ui.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +21,10 @@
             android:layout_height="wrap_content"
             android:hint="Wordle"
             android:lines="1"
+            android:inputType="text"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:text="@={viewModel.inputStringLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias=".1"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -36,6 +41,7 @@
             android:autoSizeMinTextSize="10dp"
             android:autoSizeTextType="uniform"
             android:lines="1"
+            android:onClick="@{()->viewModel.summit()}"
             android:text="Summit"
             app:layout_constraintBottom_toBottomOf="@id/et_input"
             app:layout_constraintEnd_toEndOf="parent"
