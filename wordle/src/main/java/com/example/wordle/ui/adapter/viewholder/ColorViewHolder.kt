@@ -1,10 +1,10 @@
-package com.example.wordle.viewholder
+package com.example.wordle.ui.adapter.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wordle.Color
 import com.example.wordle.R
+import com.example.wordle.constant.Color
 import com.example.wordle.databinding.ItemColorBinding
 
 class ColorViewHolder(private val binding: ItemColorBinding) :

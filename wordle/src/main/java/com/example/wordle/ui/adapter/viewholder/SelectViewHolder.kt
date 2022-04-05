@@ -1,11 +1,11 @@
-package com.example.wordle.viewholder
+package com.example.wordle.ui.adapter.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wordle.Color
 import com.example.wordle.convertBackgroundAndTextColor
 import com.example.wordle.R
+import com.example.wordle.constant.Color
 import com.example.wordle.databinding.ItemSelectBinding
 
 class SelectViewHolder(private val binding: ItemSelectBinding) :

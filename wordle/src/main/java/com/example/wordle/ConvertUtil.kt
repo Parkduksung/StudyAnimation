@@ -1,6 +1,7 @@
 package com.example.wordle
 
 import android.widget.TextView
+import com.example.wordle.constant.Color
 
 object ConvertUtil {
     fun convertList(result: String, input: String): List<Pair<Color, String>> {
@@ -21,12 +22,6 @@ object ConvertUtil {
         }
         return convertList
     }
-}
-
-sealed class Color {
-    object Yellow : Color()
-    object Green : Color()
-    object Gray : Color()
 }
 
 fun TextView.convertBackgroundAndTextColor(color: Color) {

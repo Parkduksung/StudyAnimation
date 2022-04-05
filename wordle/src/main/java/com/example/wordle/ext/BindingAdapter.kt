@@ -2,7 +2,7 @@ package com.example.wordle.ext
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.wordle.Color
+import com.example.wordle.constant.Color
 
 
 @BindingAdapter("convertBackgroundAndTextColor")

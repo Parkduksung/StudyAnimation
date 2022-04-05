@@ -6,7 +6,7 @@
 
         <variable
             name="color"
-            type="com.example.wordle.Color" />
+            type="com.example.wordle.constant.Color" />
 
         <variable
             name="string"

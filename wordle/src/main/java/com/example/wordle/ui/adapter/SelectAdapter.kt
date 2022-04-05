@@ -1,9 +1,9 @@
-package com.example.wordle.adapter
+package com.example.wordle.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wordle.Color
-import com.example.wordle.viewholder.SelectViewHolder
+import com.example.wordle.constant.Color
+import com.example.wordle.ui.adapter.viewholder.SelectViewHolder
 
 class SelectAdapter : RecyclerView.Adapter<SelectViewHolder>() {
 

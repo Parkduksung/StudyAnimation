@@ -1,11 +1,15 @@
-package com.example.wordle
+package com.example.wordle.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.wordle.adapter.*
+import com.example.wordle.ConvertUtil
+import com.example.wordle.R
+import com.example.wordle.constant.Color
 import com.example.wordle.databinding.ActivityMainBinding
+import com.example.wordle.ui.adapter.ColorAdapter
+import com.example.wordle.ui.adapter.SelectAdapter
 import java.io.IOException
 import kotlin.random.Random
 
