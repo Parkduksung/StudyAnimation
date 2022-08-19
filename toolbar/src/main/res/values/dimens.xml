@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="titlebar_side_button_width">@dimen/wrap_content</dimen>
+    <dimen name="titlebar_side_button_height">@dimen/wrap_content</dimen>
+
+</resources>

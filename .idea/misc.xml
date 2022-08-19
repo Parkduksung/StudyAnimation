@@ -14,6 +14,14 @@
         <entry key="expandablelistview/src/main/res/layout/item_exam.xml" value="0.1503623188405797" />
         <entry key="piechart/src/main/res/layout/activity_linear.xml" value="0.21965579710144928" />
         <entry key="piechart/src/main/res/layout/activity_main.xml" value="0.11770833333333333" />
+        <entry key="toolbar/src/main/res/drawable/button_headermenu.xml" value="0.2135" />
+        <entry key="toolbar/src/main/res/layout/activity_main.xml" value="0.23324275362318841" />
+        <entry key="toolbar/src/main/res/layout/attrs.xml" value="0.23324275362318841" />
+        <entry key="toolbar/src/main/res/layout/fragment_sample1.xml" value="0.13802083333333334" />
+        <entry key="toolbar/src/main/res/layout/fragment_sample2.xml" value="0.23324275362318841" />
+        <entry key="toolbar/src/main/res/layout/layout_title.xml" value="0.401305057096248" />
+        <entry key="toolbar/src/main/res/layout/layout_toolbar.xml" value="0.14159067882472137" />
+        <entry key="toolbar/src/main/res/layout/layout_toolbar_common.xml" value="0.23324275362318841" />
         <entry key="tooltip/src/main/res/drawable/pc26_round_box.xml" value="0.5432291666666667" />
         <entry key="tooltip/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="tooltip/src/main/res/layout/layout_custom_tooltip.xml" value="0.67" />
