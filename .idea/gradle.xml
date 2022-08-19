@@ -17,12 +17,12 @@
             <option value="$PROJECT_DIR$/coordinatorlyaout" />
             <option value="$PROJECT_DIR$/expandablelistview" />
             <option value="$PROJECT_DIR$/piechart" />
+            <option value="$PROJECT_DIR$/toolbar" />
             <option value="$PROJECT_DIR$/tooltip" />
             <option value="$PROJECT_DIR$/usage" />
             <option value="$PROJECT_DIR$/wordle" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
