@@ -6,8 +6,10 @@ plugins {
 android {
     compileSdk 32
 
+    namespace "com.example.picker"
+
     defaultConfig {
-        applicationId "com.example.circlemenu"
+        applicationId "com.example.picker"
         minSdk 23
         targetSdk 32
         versionCode 1
@@ -45,5 +47,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
+    implementation 'com.jzxiang.pickerview:TimePickerDialog:1.0.1'
 }
